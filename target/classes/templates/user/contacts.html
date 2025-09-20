@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> -->
+</head>
+
+<body>
+    <div id="content">
+
+        <div data-th-replace="~{user/sidebar :: sidebar}"></div>
+        <div class="pl-68">
+            <div>
+
+
+
+                <div class="relative overflow-x-auto px-6 py-5">
+                    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                        <thead class="text-xs text-white uppercase bg-blue-600">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    Name
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    Phone Number
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    Email
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    Favourite
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="c : ${contacts}" class="bg-white border-b border-gray-200 text-black">
+                                <td
+                                    th:text="${c.name}" class="px-6 py-4 text-center" >
+                                </td>
+                                <td th:text="${c.phoneNumber}" class="px-6 py-4 text-center">
+                        
+                                </td>
+                                <td th:text="${c.email}" class="px-6 py-4 text-center">
+                                    
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <span th:if="${c.favourite}" class="text-green-800 text-center">Yes</span>
+                                    <span th:unless="${c.favourite}" class="text-red-800 text-center">No</span>
+                                </td>
+                                <td class="px-6 py-4 text-center">
+                                    <button th:onclick="loadContactdata([[${c.id}]])" type="button"
+                                        class="font-medium text-blue-600 dark:text-blue-500  px-1"> View </button>
+
+                                    <a th:href="@{'/user/contacts/updateView/'+${c.id}}"
+                                        class="font-medium text-blue-600 dark:text-blue-500  px-1"> Update </a>
+
+                                    <a th:href="@{'/user/contacts/deleteContact/'+${c.id}}"
+                                        class="font-medium text-blue-600 dark:text-blue-500  px-1"> delete </a>
+                                    
+                                </td>
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                    <div data-th-replace="~{user/contact_modals :: contact}"></div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <script data-th-src="@{'/js/contact.js'}"></script>
+    </div>
+    
+</body>
+
+</html>
